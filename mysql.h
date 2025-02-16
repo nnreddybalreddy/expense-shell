@@ -29,4 +29,4 @@ else
     echo "Its a root user"    
 fi
 
-dnf install mysql-server -y &>>LOGFILE
+dnf install mysql-server -y &>>$LOGFILE
