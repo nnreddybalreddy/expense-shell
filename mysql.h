@@ -10,6 +10,9 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+echo "Enter Password:"
+read -s MYSQL_ROOT_PASSWORD
+
 VALIDATE(){
     if [ $? -ne 0 ]
     then 
@@ -50,10 +53,10 @@ systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "start  of mysql server"
 
 
-mysql -h db.narendra.shop -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+mysql -h db.narendra.shop -uroot -p${MYSQL_ROOT_PASSWORD} -e 'show databases;' &>>$LOGFILE
 if [ $? -ne 0 ]
 then 
-    mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+    mysql_secure_installation --set-root-pass ${MYSQL_ROOT_PASSWORD} &>>$LOGFILE
     VALIDATE $? "Setting up  mysql server password"  
 else 
     echo -e "$Y password alreay set $N"      
