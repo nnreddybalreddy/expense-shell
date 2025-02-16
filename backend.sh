@@ -11,8 +11,8 @@ LOGFILE=/tmp/$TIMESTAMP-$SCRIPT_NAME.log
 
 USERID=$(id -u)
 
-# echo "Enter mysql root password"
-# read mysql_root_password
+echo "Enter mysql root password"
+read mysql_root_password
 
 VALIDATE(){
     if [ $1 -ne 0 ]
