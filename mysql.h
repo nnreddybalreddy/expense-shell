@@ -50,7 +50,7 @@ systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "start  of mysql server"
 
 
-mysql -h db.narendra -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+mysql -h db.narendra.online -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
 if [ $? -eq 0 ]
 then 
     echo "password alreay set"
