@@ -53,7 +53,7 @@ VALIDATE $? "start  of mysql server"
 mysql -h db.narendra.shop -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
 if [ $? -eq 0 ]
 then 
-    echo "password alreay set"
+    echo -e "$Y password alreay set $N"
 else 
     mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
     VALIDATE $? "Setting up  mysql server password"       
