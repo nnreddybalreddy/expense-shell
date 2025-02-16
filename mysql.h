@@ -38,7 +38,7 @@ systemctl enable mysqld &>>$LOGFILE
 VALIDATE $? "Installation of mysql server"
 
 
-systemctl start mysqld &>>$LOGFILE 
+systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "Installation of mysql server"
 
 mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
