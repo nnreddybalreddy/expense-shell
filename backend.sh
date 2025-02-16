@@ -44,7 +44,7 @@ VALIDATE $? "install nodejs 20"
 
 id expense &>>$LOGFILE
 
-if [ $? eq 0 ]
+if [ $? -eq 0 ]
 then 
     echo -e "$Y Expense user already added $N"
 else  
