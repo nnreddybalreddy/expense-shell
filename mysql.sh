@@ -32,7 +32,7 @@ fi
 
 
 dnf list installed mysql-server &>>$LOGFILE
-if [ $? eq 0 ]
+if [ $? -eq 0 ]
 then 
     echo "ALready mysql-server is installed"
 else 
@@ -49,7 +49,7 @@ VALIDATE $? "start  mysql"
 
 
 mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
-VALIDATE $? "start  mysql"
+VALIDATE $? "Password set"
 
 
 
