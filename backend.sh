@@ -74,7 +74,7 @@ systemctl enable backend &>>$LOGFILE
 VALIDATE $? "enable backend"
 
 dnf list installed mysql &>>$LOGFILE
-if [$? -eq 0 ]
+if [ $? -eq 0 ]
 then 
     echo "mysql already installed"
 else 
