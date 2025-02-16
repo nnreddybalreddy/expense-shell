@@ -30,14 +30,37 @@ else
 fi
 
 dnf install mysql-server -y &>>$LOGFILE
-VALIDATE $? "mysql-server installation"
+
+if [ $? -eq 0 ]
+then 
+    echo "mysql server already installed"
+else 
+    VALIDATE $? "mysql-server installation"
+fi
 
 systemctl enable mysqld &>>$LOGFILE
-VALIDATE $? "enable mysql server"
+if [ $? -eq 0 ]
+then 
+    echo "mysql server already installed"
+else 
+    VALIDATE $? "enable mysql server"
+fi
+
+
 
 systemctl start mysqld &>>$LOGFILE 
-VALIDATE $? "start mysql-server"
+if [ $? -eq 0 ]
+then 
+    echo "mysql server already installed"
+else 
+    VALIDATE $? "start mysql server"
+fi
 
 mysql_secure_installation --set-root-pass ExpenseApp@1  &>>$LOGFILE
-VALIDATE $? "setting up root password"
+if [ $? -eq 0 ]
+then 
+    echo "password already set it up"
+else 
+    VALIDATE $? "password setup success"
+fi
 
