@@ -73,8 +73,6 @@ VALIDATE $? "start backend"
 systemctl enable backend &>>$LOGFILE
 VALIDATE $? "enable backend"
 
-dnf list installed mysql &>>$LOGFILE
-VALIDATE $? "enable backend"
 
 if [$? -eq 0 ]
 then 
