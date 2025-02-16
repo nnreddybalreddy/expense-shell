@@ -11,6 +11,9 @@ LOGFILE=/tmp/$TIMESTAMP-$SCRIPT_NAME.log
 
 USERID=$(id -u)
 
+echo "Enter mysql root password"
+read mysql_root_password
+
 VALIDATE(){
     if [ $1 -ne 0 ]
     then 
@@ -47,8 +50,12 @@ VALIDATE $? "enable mysql"
 systemctl start mysqld
 VALIDATE $? "start  mysql"
 
-
-mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+mysql -h db.narendra.shop -uroot -p${mysql_root_password} -e 'show databases;' &>>$LOGFILE
+if [ $? -eq 0 ]
+then 
+    echo ""
+fi 
+mysql_secure_installation --set-root-pass ${mysql_root_password}  &>>$LOGFILE
 VALIDATE $? "Password set"
 
 
