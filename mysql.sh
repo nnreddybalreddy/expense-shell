@@ -31,3 +31,27 @@ else
 fi 
 
 
+dnf list installed mysql-server &>>$LOGFILE
+if [ $? eq 0 ]
+then 
+    echo "ALready mysql-server is installed"
+else 
+    dnf install mysql-server -y &>>$LOGFILE
+    VALIDATE $? "mysql server installation"
+fi
+
+
+systemctl enable mysqld 
+VALIDATE $? "enable mysql"
+
+systemctl start mysqld
+VALIDATE $? "start  mysql"
+
+
+mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+VALIDATE $? "start  mysql"
+
+
+
+
+
