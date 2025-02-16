@@ -11,7 +11,7 @@ Y="\e[33m"
 N="\e[0m"
 
 VALIDATE(){
-    if [ $1 -ne 0 ]
+    if [ $? -ne 0 ]
     then 
         echo -e "   $2... $R failure $N"
         exit 1
@@ -23,7 +23,7 @@ VALIDATE(){
 
 USERID=$(id -u)
 
-if [ $   -ne 0 ]
+if [ $? -ne 0 ]
 then 
     echo "not a root user"
     exit 1
@@ -49,7 +49,15 @@ VALIDATE $? "enable of  mysql server"
 systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "start  of mysql server"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
-VALIDATE $? "Setting up  mysql server password"
+
+mysql -h db.daws78s.online -uroot -p${mysql_root_password} -e 'show databases;' &>>$LOGFILE
+if [ $? -eq 0 ]
+then 
+    echo "password alreay set"
+else 
+    mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+    VALIDATE $? "Setting up  mysql server password"       
+fi
+
 
 
