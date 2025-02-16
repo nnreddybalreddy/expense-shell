@@ -30,3 +30,4 @@ else
 fi
 
 dnf install mysql-server -y &>>$LOGFILE
+VALIDATE $? "mysql-server installation"
