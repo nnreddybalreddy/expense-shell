@@ -3,6 +3,8 @@ TIMESTAMP=$(date +%F-%M-%H-%S)
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1)
 
 LOGFILE=/tmp/$TIMESTAMP-$SCRIPT_NAME.log
+
+
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
@@ -30,37 +32,16 @@ else
 fi
 
 dnf install mysql-server -y &>>$LOGFILE
-
-if [ $? -eq 0 ]
-then 
-    echo "mysql server already installed"
-else 
-    VALIDATE $? "mysql-server installation"
-fi
+VALIDATE $? "Installation of mysql server"
 
 systemctl enable mysqld &>>$LOGFILE
-if [ $? -eq 0 ]
-then 
-    echo "mysql server already installed"
-else 
-    VALIDATE $? "enable mysql server"
-fi
-
+VALIDATE $? "Installation of mysql server"
 
 
 systemctl start mysqld &>>$LOGFILE 
-if [ $? -eq 0 ]
-then 
-    echo "mysql server already installed"
-else 
-    VALIDATE $? "start mysql server"
-fi
+VALIDATE $? "Installation of mysql server"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1  &>>$LOGFILE
-if [ $? -eq 0 ]
-then 
-    echo "password already set it up"
-else 
-    VALIDATE $? "password setup success"
-fi
+mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+VALIDATE $? "Installation of mysql server"
+
 
