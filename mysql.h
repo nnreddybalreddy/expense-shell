@@ -1,4 +1,6 @@
 #!/bin/bash
+
+USERID=$(id -u)
 TIMESTAMP=$(date +%F-%M-%H-%S)
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1)
 
@@ -21,7 +23,7 @@ VALIDATE(){
 
 USERID=$(id -u)
 
-if [ $USERID -ne 0 ]
+if [ $   -ne 0 ]
 then 
     echo "not a root user"
     exit 1
@@ -47,7 +49,7 @@ VALIDATE $? "enable of  mysql server"
 systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "start  of mysql server"
 
-mysql_secure_installation --set-root-pass ExpenseApp@2 &>>$LOGFILE
+mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
 VALIDATE $? "Setting up  mysql server password"
 
 
