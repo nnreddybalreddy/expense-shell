@@ -31,8 +31,16 @@ else
     echo "Its a root user"    
 fi
 
-dnf install mysql-server -y &>>$LOGFILE
-VALIDATE $? "Installation of mysql server"
+
+dnf list installed mysql-server &>>$LOGFILE
+if [ $? -eq 0 ]
+then
+    echo -e "$R mysql server is already installed $N"
+else 
+    dnf install mysql-server -y &>>$LOGFILE
+    VALIDATE $? "Installation of mysql server"
+fi 
+
 
 systemctl enable mysqld &>>$LOGFILE
 VALIDATE $? "enable of  mysql server"
