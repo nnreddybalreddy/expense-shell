@@ -53,10 +53,12 @@ VALIDATE $? "start  mysql"
 mysql -h db.narendra.shop -uroot -p${mysql_root_password} -e 'show databases;' &>>$LOGFILE
 if [ $? -eq 0 ]
 then 
-    echo ""
+    echo "password already set"
+else 
+    mysql_secure_installation --set-root-pass ${mysql_root_password}  &>>$LOGFILE
+    VALIDATE $? "Password set"        
 fi 
-mysql_secure_installation --set-root-pass ${mysql_root_password}  &>>$LOGFILE
-VALIDATE $? "Password set"
+
 
 
 
